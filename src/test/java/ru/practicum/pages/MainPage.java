@@ -8,13 +8,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
     private final WebDriver driver;
-    //локатор первого элемента аккордеона
-    private final By accordionHeading = By.id("accordion__heading-0");
+
     //локатор кнопки Заказать сверху
     private final By orderButtonUp = By.xpath("//button[text()='Заказать']");
 
-    //локатор детализации аккордеона
-    private final By accordionPanel = By.id("accordion__panel-0");
     //локатор кнопки согласия сбора куки
     private final By cookieConfirmButton = By.id("rcc-confirm-button");
 
@@ -51,32 +48,10 @@ public class MainPage {
         driver.findElement(cookieConfirmButton).click();
     }
 
-    //метод кликает на аккордеон
-    public void openAccordionHeading() {
-        driver.findElement(accordionHeading).click();
-    }
 
     //метод кликает кнопку Заказать
     public void clickOrderButtonUp() {
         driver.findElement(orderButtonUp).click();
-    }
-
-
-    //метод проверяет видимость аккордеона
-    public void shouldVisibleAccordionPanel() {
-        driver.findElement(accordionPanel).isDisplayed();
-    }
-
-    //метод проверяет появление аккордеона на странице
-    public void waitVisibleAccordionPanel() {
-        new WebDriverWait(driver, 3)
-                .until(ExpectedConditions.elementToBeClickable(accordionHeading));
-    }
-
-
-    //метод проверяет текст аккордеона
-    public void shouldTextAccordionPanel(String value) {
-        Assert.assertEquals("Текст не совпадает", value, driver.findElement(accordionPanel).getText());
     }
 
 
@@ -101,7 +76,6 @@ public class MainPage {
         Assert.assertEquals("Текст не совпадает", value, driver.findElement(homeTitle).getText());
     }
 
-
     //метод кликает на кнопку Статус заказа
     public void clickStatusOrderButton() {
         driver.findElement(statusOrderButton).click();
@@ -112,7 +86,6 @@ public class MainPage {
         driver.findElement(orderInput).click();
         driver.findElement(orderInput).sendKeys(order);
     }
-
 
     //метод кликает на кнопку Go
     public void clickGoButton() {
@@ -129,6 +102,11 @@ public class MainPage {
     public void waitVisibleOrderInput() {
         new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.elementToBeClickable(orderInput));
+    }
+
+    //метод открытия аккордеона
+    public void openAccordionHeading(By accordionTitle) {
+        driver.findElement(accordionTitle).click();
     }
 
 }
